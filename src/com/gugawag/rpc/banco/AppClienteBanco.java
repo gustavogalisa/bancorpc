@@ -23,14 +23,30 @@ public class AppClienteBanco {
         while(opcao != 9) {
             switch (opcao) {
                 case 1: {
-                    System.out.println("Digite o número da conta:");
+                    System.out.println("Digite o número da conta: ");
                     String conta = entrada.next();
-                    //chamada ao método remoto, como se fosse executar localmente
-                    System.out.println(banco.saldo(conta));
+
+                    Double saldo = banco.saldo(conta);
+
+                    if (saldo == -1) {
+                        System.out.println("Conta não existe.");
+                    } else {
+                        System.out.println(saldo);
+                    }
+
                 }
                 case 2: {
                     //chamada ao método remoto, como se fosse executar localmente
-                    System.out.println(banco.quantidadeContas());
+                    System.out.println("Existem " + banco.quantidadeContas() + " contas.");
+                }
+                case 3: {
+                    System.out.println("Digite o número da conta: ");
+                    String numero = entrada.next();
+
+                    System.out.println("Digite o saldo: ");
+                    Double saldo = entrada.nextDouble();
+
+                    banco.adicionarConta(numero, saldo);
                 }
             }
             menu();
@@ -42,7 +58,9 @@ public class AppClienteBanco {
         System.out.println("\n=== BANCO RMI (ou FMI?!) ===");
         System.out.println("1 - Saldo da conta");
         System.out.println("2 - Quantidade de contas");
+        System.out.println("3 - Adicionar nova conta");
         System.out.println("9 - Sair");
+        System.out.println("=== Gustavo Galisa ===");
     }
 
 }
